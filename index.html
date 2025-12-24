@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+            background: #f0f8ff; font-family: 'Quicksand', sans-serif;
+            background-image: radial-gradient(#d1d1d1 1px, transparent 1px); background-size: 20px 20px;
+            overflow: hidden;
+        }
+        .screen {
+            text-align: center; background: white; padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 320px; display: none;
+            position: relative; z-index: 10;
+        }
+        .active { display: block; animation: fadeIn 0.5s; }
+        .gift { font-size: 80px; cursor: pointer; animation: bounce 2s infinite; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+        .card {
+            height: 70px; border: 2px solid #ffeded; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-weight: bold; font-size: 1.1rem;
+        }
+        .flipped { background: #fff0f0; color: #ff4d4d; border-color: #ffcccc; }
+        .btn {
+            background: #ff4d4d; color: white; border: none; padding: 12px 25px;
+            border-radius: 25px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%;
+        }
+        .btn-tease { background: #5d5d5d; margin-top: 10px; }
+        .letter-content { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #444; line-height: 1.2; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div id="s1" class="screen active">
+        <h2>For someone special</h2>
+        <div class="gift" onclick="showScreen('s2')">🎁</div>
+        <p>Tap me!</p>
+    </div>
+
+    <div id="s2" class="screen">
+        <div style="font-size: 50px;">⛄</div>
+        <h3>Something special for you...</h3>
+        <button class="btn" onclick="showScreen('s3')">Open it</button>
+    </div>
+
+    <div id="s3" class="screen">
+        <p>I don't need a gift because...</p>
+        <div class="grid">
+            <div class="card" onclick="flip(this, 'You')">❤️</div>
+            <div class="card" onclick="flip(this, 'Are')">❤️</div>
+            <div class="card" onclick="flip(this, 'My')">❤️</div>
+            <div class="card" onclick="flip(this, 'Gift 🎁')">❤️</div>
+        </div>
+        <button class="btn" id="nextBtn" style="display:none;" onclick="showScreen('s4')">Click me to reveal more</button>
+    </div>
+
+    <div id="s4" class="screen">
+        <div class="letter-content">
+            <p>You are the blessings I received yea, and I wish to have it for a lifetime...</p>
+        </div>
+        <button class="btn" onclick="showScreen('s5')">Show more</button>
+    </div>
+
+    <div id="s5" class="screen">
+        <h3>Wait a second... 🤔</h3>
+        <p>I just realized you're actually kind of a headache.</p>
+        <p>A cute one, but definitely a headache. Don't let it go to your head!</p>
+        <div style="font-size: 40px;">😜🔥</div>
+        <button class="btn btn-tease" onclick="annoyPrank()">Okay, I'm done</button>
+    </div>
+
+    <script>
+        let flips = 0;
+
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function flip(el, text) {
+            if (!el.classList.contains('flipped')) {
+                el.innerText = text;
+                el.classList.add('flipped');
+                flips++;
+                if (flips === 4) document.getElementById('nextBtn').style.display = 'block';
+            }
+        }
+
+        // OPTION 2: THE ANNOYING ALERTS
+        function annoyPrank() {
+            alert("Wait! You think it's that easy to leave?");
+            alert("I have 47 more things to say.");
+            alert("Actually, let's start with how much you talk...");
+            alert("Are you getting annoyed yet?");
+            alert("Good.");
+            alert("Because I'm not finished.");
+            alert("Okay okay, fine.");
+            alert("Just wanted to see that annoyed face of yours one last time.");
+            alert("Merry Christmas, Headache! ❤️");
+        }
+    </script>
+</body>
+</html>
